@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="minigame">
+    <output-path>$USER_HOME$/Desktop/Folders/Dev/Java Stuff/1.12.2 Spigot Dev Server/plugins</output-path>
+    <root id="archive" name="minigame.jar">
+      <element id="module-output" name="Minigame" />
+    </root>
+  </artifact>
+</component>
