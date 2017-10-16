@@ -15,7 +15,7 @@ public class Main extends JavaPlugin {
     private File configFile, arenasFile;
     private FileConfiguration config, arenas;
 
-    @Override
+    @Override 
     public void onEnable(){
         createFiles();
         this.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "\n#\n#    Minigame 1.0.0 has been enabled.\n#");
