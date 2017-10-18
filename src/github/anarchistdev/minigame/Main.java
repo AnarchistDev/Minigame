@@ -48,7 +48,7 @@ public class Main extends JavaPlugin {
 
     public void saveArenas() {
         try {
-            arenas.save("arenas.yml");
+            arenas.save(arenasFile);
         } catch (IOException e){
             e.printStackTrace();
         }

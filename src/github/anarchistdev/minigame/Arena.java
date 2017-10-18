@@ -13,6 +13,8 @@ public class Arena {
 
     Main pl = Main.getInstance();
 
+    FileConfiguration arenas = pl.getArenas();
+
     public Arena (int id, String name, int pos1, int pos2){
 
         this.setId(id);
@@ -72,12 +74,12 @@ public class Arena {
 
     }
 
-    public boolean arenaExists(int id){
+    public static boolean arenaExists(int id){
 
-        boolean exists = false;
-        // Check config for Arena ID
-
-        return exists;
+        if (Main.getInstance().getArenas().get("arenas." + String.valueOf(id)) == null) {
+            return false;
+        }
+        else return true;
     }
 
 }
