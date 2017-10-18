@@ -2,3 +2,7 @@ name: Minigame
 version: 1.0.0
 author: AnarchistDev
 main: github.anarchistdev.minigame.Main
+commands:
+  mg:
+    description: Basis command
+    usage: /mg create <ID> <name> <pos1> <pos2>

@@ -1,5 +1,9 @@
 package github.anarchistdev.minigame;
 
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
+
 public class Arena {
 
     private int id;
@@ -7,12 +11,20 @@ public class Arena {
     private int pos1;
     private int pos2;
 
+    Main pl = Main.getInstance();
+
     public Arena (int id, String name, int pos1, int pos2){
 
         this.setId(id);
         this.setName(name);
         this.setPos1(pos1);
         this.setPos2(pos2);
+
+        FileConfiguration arenas = pl.getArenas();
+        arenas.set("arenas." + String.valueOf(id) + ".name", name);
+        arenas.set("arenas." + String.valueOf(id) + ".pos1", String.valueOf(pos1));
+        arenas.set("arenas." + String.valueOf(id) + ".pos2", String.valueOf(pos2));
+        pl.saveArenas();
 
     }
 
@@ -50,6 +62,22 @@ public class Arena {
 
     public void setPos2(int pos2) {
         this.pos2 = pos2;
+    }
+
+    /*
+          Methods
+     */
+
+    public void createArena(){
+
+    }
+
+    public boolean arenaExists(int id){
+
+        boolean exists = false;
+        // Check config for Arena ID
+
+        return exists;
     }
 
 }
