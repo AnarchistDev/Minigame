@@ -25,7 +25,7 @@ public class ArenaUtils {
 
         String path = "arenas." + String.valueOf(id);
 
-        arenas.addDefault(path + ".name", name);
+        arenas.set(path + ".name", name);
 
         locHandler.saveLocation(path + ".loc1", loc1);
         locHandler.saveLocation(path + ".loc2", loc2);
