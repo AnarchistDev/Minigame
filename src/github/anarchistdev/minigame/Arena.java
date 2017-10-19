@@ -1,32 +1,31 @@
 package github.anarchistdev.minigame;
 
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
 
 public class Arena {
 
     private int id;
     private String name;
-    private int pos1;
-    private int pos2;
+    private Location loc1;
+    private Location loc2;
+    private ArrayList<Player> players;
 
     Main pl = Main.getInstance();
 
     FileConfiguration arenas = pl.getArenas();
 
-    public Arena (int id, String name, int pos1, int pos2){
+    public Arena (int id, String name, Location loc1, Location loc2, ArrayList<Player> players){
 
         this.setId(id);
         this.setName(name);
-        this.setPos1(pos1);
-        this.setPos2(pos2);
-
-        FileConfiguration arenas = pl.getArenas();
-        arenas.set("arenas." + String.valueOf(id) + ".name", name);
-        arenas.set("arenas." + String.valueOf(id) + ".pos1", String.valueOf(pos1));
-        arenas.set("arenas." + String.valueOf(id) + ".pos2", String.valueOf(pos2));
-        pl.saveArenas();
+        this.setLoc1(loc1);
+        this.setLoc2(loc2);
 
     }
 
@@ -50,37 +49,32 @@ public class Arena {
         this.name = name;
     }
 
-    public int getPos1() {
-        return pos1;
+    public Location getLoc1() {
+        return loc1;
     }
 
-    public void setPos1(int pos1) {
-        this.pos1 = pos1;
+    public void setLoc1(Location loc1) {
+        this.loc1 = loc1;
     }
 
-    public int getPos2() {
-        return pos2;
+    public Location getLoc2() {
+        return loc2;
     }
 
-    public void setPos2(int pos2) {
-        this.pos2 = pos2;
+    public void setLoc2(Location loc2) {
+        this.loc2 = loc2;
     }
 
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
     /*
           Methods
      */
-
-    public void createArena(){
-
-    }
-
-    public static boolean arenaExists(int id){
-
-        if (Main.getInstance().getArenas().get("arenas." + String.valueOf(id)) == null) {
-            return false;
-        }
-        else return true;
-    }
 
 }
 

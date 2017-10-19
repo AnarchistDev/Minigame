@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class Commands implements CommandExecutor{
@@ -12,10 +13,18 @@ public class Commands implements CommandExecutor{
 
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
 
+        ArenaUtils aUtil = new ArenaUtils();
+        LocationHandler lHandler = new LocationHandler();
+
         if (sender instanceof Player){
             Player p = (Player) sender;
 
-            if (args.length == 5){
+            if (!(p.isOp())) {
+                p.sendMessage(ChatColor.RED + "Error: You must be opped to do this!");
+                return false;
+            }
+
+            if (args.length == 3){
 
                 switch (args[0]){
 
@@ -26,27 +35,38 @@ public class Commands implements CommandExecutor{
                         if(!(this.isInt(args[1], p))){
                             break;
                         }
-                        if(!(this.isInt(args[3], p))){
-                            break;
-                        }
-                        if(!(this.isInt(args[4], p))){
-                            break;
-                        }
 
-                        if(Arena.arenaExists(Integer.valueOf(args[1]))){
+                        if(aUtil.arenaExists(Integer.valueOf(args[1]))){
                             p.sendMessage(ChatColor.RED + "This arena already exists!");
                         } else {
-                            Arena arena = new Arena(Integer.valueOf(args[1]), args[2], Integer.valueOf(args[3]), Integer.valueOf(args[4]));
+
+                            /* Grab players location twice, TODO:
+                                  /mg pos1
+                                  /mg pos2
+                                  store Locations, pass to createArena()
+                             */
+
+                            aUtil.createArena(Integer.valueOf(args[1]), args[2], p.getLocation(), p.getLocation());
+                            pl.saveArenas();
                             p.sendMessage(ChatColor.GREEN + "Created arena: " + ChatColor.WHITE + String.valueOf(args[1]));
+
                         }
                         break;
 
                     case "pos1":
 
+                        /*
+                             NOT yet linked to createArena ^^^
+                         */
+
+                        lHandler.saveLocation("loc1", p.getLocation());
+
                         // Store location in a variable, maybe need new object?
                         break;
 
                     case "pos2":
+
+                        lHandler.saveLocation("loc2", p.getLocation());
 
                         // ^^^
                         break;
