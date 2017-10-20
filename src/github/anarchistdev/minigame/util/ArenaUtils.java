@@ -1,5 +1,6 @@
-package github.anarchistdev.minigame;
+package github.anarchistdev.minigame.util;
 
+import github.anarchistdev.minigame.Main;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 
