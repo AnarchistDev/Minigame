@@ -8,31 +8,28 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Arena {
+    private Main pl = Main.getInstance();
 
     private int id;
     private String name;
     private Location loc1;
     private Location loc2;
-    private ArrayList<Player> players;
+    private List<Player> players = new ArrayList<>();
 
-    Main pl = Main.getInstance();
 
     FileConfiguration arenas = pl.getArenas();
 
     public Arena (int id, String name, Location loc1, Location loc2, ArrayList<Player> players){
-
-        this.setId(id);
-        this.setName(name);
-        this.setLoc1(loc1);
-        this.setLoc2(loc2);
-
+        this.id = id;
+        this.name = name;
+        this.loc1 = loc1;
+        this.loc2 = loc2;
     }
-
-    /*
-          Getters & Setters
-     */
 
     public int getId() {
         return id;
@@ -66,16 +63,24 @@ public class Arena {
         this.loc2 = loc2;
     }
 
-    public ArrayList<Player> getPlayers() {
-        return players;
+    public List<Player> getPlayers() {
+        return Collections.unmodifiableList(players);
     }
 
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
+    public void addPlayer(Player player) {
+        players.add(player);
     }
-    /*
-          Methods
-     */
 
+    public void addPlayers(Player... players) {
+        this.players.addAll(Arrays.asList(players));
+    }
+
+    public void removePlayer(Player player) {
+        players.remove(player);
+    }
+
+    public void removePlayers(Player... players) {
+        this.players.removeAll(Arrays.asList(players));
+    }
 }
 

@@ -5,33 +5,21 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class ArenaUtils {
-
-    Main pl = Main.getInstance();
-
-    FileConfiguration arenas = pl.getArenas();
-
-    public ArenaUtils(){
-        // Does nothing, used to access methods.
+    public static boolean arenaExists(int id){
+        return !(Main.getInstance().getArenas().get("arenas." + String.valueOf(id)) == null);
     }
 
-    public boolean arenaExists(int id){
-
-        return (!(Main.getInstance().getArenas().get("arenas." + String.valueOf(id)) == null));
-
-    }
-
-    public void createArena(int id, String name, Location loc1, Location loc2){
-
-        LocationHandler locHandler = new LocationHandler();
+    public static void createArena(int id, String name, Location loc1, Location loc2){
+        LocationUtil locHandler = new LocationUtil();
 
         String path = "arenas." + String.valueOf(id);
 
-        arenas.set(path + ".name", name);
+        Main.getInstance().getArenas().set(path + ".name", name);
 
         locHandler.saveLocation(path + ".loc1", loc1);
         locHandler.saveLocation(path + ".loc2", loc2);
 
-        pl.saveArenas();
+        Main.getInstance().saveArenas();
 
     }
 

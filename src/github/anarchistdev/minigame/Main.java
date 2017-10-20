@@ -11,59 +11,27 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main extends JavaPlugin {
-
     private static Main instance;
 
-    public Main() {
-        instance = this;
-    }
-
-    public static Main getInstance() {
-        return instance;
-    }
-
     private File configFile, arenasFile;
-    private FileConfiguration config, arenas;
+    private static FileConfiguration config, arenas;
 
     @Override
     public void onEnable(){
         instance = this;
 
         createFiles();
-        this.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "\n#\n#    Minigame 1.0.0 has been enabled.\n#");
         this.getCommand("mg").setExecutor(new Commands());
     }
 
     @Override
     public void onDisable() {
-        this.getServer().getConsoleSender().sendMessage(ChatColor.RED + "\n#\n#    Minigame 1.0.0 has been disabled.\n#");
-
         instance = null;
     }
 
-    public FileConfiguration getArenas() {
-        return this.arenas;
-    }
-
-    public void saveArenas() {
-        try {
-            arenas.save(arenasFile);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    /*
-          Config Manager for multiple configs:
-     */
-
-    public void createFiles(){
-
-        // Creating config locations on server
+    private void createFiles(){
         configFile = new File(this.getDataFolder(), "config.yml");
         arenasFile = new File(this.getDataFolder(), "arenas.yml");
-
-        // Check for configs, create if doesn't exist
 
         if (!configFile.exists()) {
             configFile.getParentFile().mkdirs();
@@ -75,20 +43,30 @@ public class Main extends JavaPlugin {
             saveResource("arenas.yml", false);
         }
 
-        // Make the actual .yml files (and other witchcraft)
-
         config = new YamlConfiguration();
         arenas = new YamlConfiguration();
 
         try {
             config.load(configFile);
             arenas.load(arenasFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidConfigurationException e) {
+        } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
-
     }
 
+    public void saveArenas() {
+        try {
+            arenas.save(arenasFile);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public FileConfiguration getArenas() {
+        return arenas;
+    }
+
+    public static Main getInstance() {
+        return instance;
+    }
 }
