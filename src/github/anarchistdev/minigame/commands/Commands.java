@@ -1,5 +1,6 @@
-package github.anarchistdev.minigame;
+package github.anarchistdev.minigame.commands;
 
+import github.anarchistdev.minigame.Main;
 import github.anarchistdev.minigame.util.ArenaUtils;
 import github.anarchistdev.minigame.util.LocationHandler;
 import org.bukkit.ChatColor;

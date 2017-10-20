@@ -1,5 +1,6 @@
-package github.anarchistdev.minigame;
+package github.anarchistdev.minigame.objects;
 
+import github.anarchistdev.minigame.objects.Arena;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
