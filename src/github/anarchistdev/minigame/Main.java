@@ -1,8 +1,7 @@
 package github.anarchistdev.minigame;
 
-import org.bukkit.Bukkit;
+import github.anarchistdev.minigame.commands.Commands;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
