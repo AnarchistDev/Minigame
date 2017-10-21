@@ -1,4 +1,4 @@
-package github.anarchistdev.minigame;
+package github.anarchistdev.minigame.Objects;
 
 import org.bukkit.entity.Player;
 

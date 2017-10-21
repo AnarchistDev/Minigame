@@ -1,5 +1,6 @@
-package github.anarchistdev.minigame;
+package github.anarchistdev.minigame.Objects;
 
+import github.anarchistdev.minigame.Main;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -14,18 +15,23 @@ public class Arena {
     private String name;
     private Location loc1;
     private Location loc2;
+    private Location spawn;
     private ArrayList<Player> players;
+    boolean running;
 
     Main pl = Main.getInstance();
 
     FileConfiguration arenas = pl.getArenas();
 
-    public Arena (int id, String name, Location loc1, Location loc2, ArrayList<Player> players){
+    public Arena (int id, String name, Location loc1, Location loc2, ArrayList<Player> players, boolean running){
 
         this.setId(id);
         this.setName(name);
         this.setLoc1(loc1);
         this.setLoc2(loc2);
+        this.setSpawn(spawn);
+        this.setPlayers(players);
+        this.setRunning(running);
 
     }
 
@@ -65,6 +71,14 @@ public class Arena {
         this.loc2 = loc2;
     }
 
+    public void setSpawn(Location spawn) {
+        this.spawn = spawn;
+    }
+
+    public Location getSpawn(){
+        return this.spawn;
+    }
+
     public ArrayList<Player> getPlayers() {
         return players;
     }
@@ -72,6 +86,15 @@ public class Arena {
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
     /*
           Methods
      */

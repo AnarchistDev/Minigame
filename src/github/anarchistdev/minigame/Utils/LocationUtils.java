@@ -1,28 +1,17 @@
-package github.anarchistdev.minigame;
+package github.anarchistdev.minigame.Utils;
 
+import github.anarchistdev.minigame.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 
-public class LocationHandler {
+public class LocationUtils {
 
-    Main pl = Main.getInstance();
+    public static void saveLocation(String path, Location loc){
 
-    FileConfiguration arenas = pl.getArenas();
-
-    public LocationHandler(){
-        // Does nothing, used to access methods.
-    }
-
-    /*  TO DO:
-    public static void saveLocation(Location loc) {
-        config.set("path", loc.getX());
-  ...
-    }
-    */
-
-    public void saveLocation(String path, Location loc){
+        FileConfiguration arenas = Main.getInstance().getArenas();
+        Main pl = Main.getInstance();
 
         double x = loc.getX();
         double y = loc.getY();
@@ -40,7 +29,10 @@ public class LocationHandler {
         pl.saveArenas();;
     }
 
-    public Location getLocation(int i){
+    public static Location getLocation(int i){
+
+        FileConfiguration arenas = Main.getInstance().getArenas();
+        Main pl = Main.getInstance();
 
         String path;
 
