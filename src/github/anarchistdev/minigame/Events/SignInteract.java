@@ -101,5 +101,3 @@ public class SignInteract implements Listener {
         }
     }
 }
-
-}
