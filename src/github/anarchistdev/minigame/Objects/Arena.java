@@ -1,6 +1,7 @@
 package github.anarchistdev.minigame.Objects;
 
 import github.anarchistdev.minigame.Main;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -17,13 +18,16 @@ public class Arena {
     private Location loc2;
     private Location spawn;
     private ArrayList<Player> players;
-    boolean running;
+    private int maxPlayers;
+
 
     Main pl = Main.getInstance();
 
     FileConfiguration arenas = pl.getArenas();
 
-    public Arena (int id, String name, Location loc1, Location loc2, ArrayList<Player> players, boolean running){
+    ArrayList<Arena> arenaList = Main.getInstance().arenaList;
+
+    public Arena(int id, String name, Location loc1, Location loc2, Location spawn, ArrayList<Player> players, int maxPlayers) {
 
         this.setId(id);
         this.setName(name);
@@ -31,7 +35,9 @@ public class Arena {
         this.setLoc2(loc2);
         this.setSpawn(spawn);
         this.setPlayers(players);
-        this.setRunning(running);
+        this.setMaxPlayers(maxPlayers);
+
+        arenaList.add(this);
 
     }
 
@@ -75,7 +81,7 @@ public class Arena {
         this.spawn = spawn;
     }
 
-    public Location getSpawn(){
+    public Location getSpawn() {
         return this.spawn;
     }
 
@@ -87,17 +93,35 @@ public class Arena {
         this.players = players;
     }
 
-    public boolean isRunning() {
-        return running;
+    public int getMaxPlayers() {
+        return maxPlayers;
     }
 
-    public void setRunning(boolean running) {
-        this.running = running;
+    public void setMaxPlayers(int maxPlayers) {
+        this.maxPlayers = maxPlayers;
     }
 
     /*
           Methods
      */
+
+    public void addPlayer(Player p) {
+
+        for (Arena arena : arenaList) {
+            if (arena.getPlayers().contains(p)) {
+                p.sendMessage(ChatColor.RED + "You are already in an arena!");
+                return;
+            }
+        }
+
+        if (this.getPlayers().size() <= this.getMaxPlayers()) {
+            this.getPlayers().add(p);
+            p.sendMessage(ChatColor.GREEN + "You have joined: " + ChatColor.WHITE + "Arena " + this.getId() + this.getName());
+        }
+        else {
+            p.sendMessage(ChatColor.RED + "This arena is full!");
+        }
+    }
 
 }
 

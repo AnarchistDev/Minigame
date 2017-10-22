@@ -1,5 +1,7 @@
 package github.anarchistdev.minigame;
 
+import github.anarchistdev.minigame.Events.SignInteract;
+import github.anarchistdev.minigame.Objects.Arena;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -10,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main extends JavaPlugin {
 
@@ -22,6 +25,7 @@ public class Main extends JavaPlugin {
     public static Main getInstance() {
         return instance;
     }
+    public final ArrayList<Arena> arenaList = new ArrayList<>();
 
     private File configFile, arenasFile;
     private FileConfiguration config, arenas;
@@ -30,9 +34,12 @@ public class Main extends JavaPlugin {
     public void onEnable(){
         instance = this;
 
+        this.getServer().getPluginManager().registerEvents(new SignInteract(), this);
+
         createFiles();
         this.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "\n#\n#    Minigame 1.0.0 has been enabled.\n#");
         this.getCommand("mg").setExecutor(new Commands());
+
     }
 
     @Override
